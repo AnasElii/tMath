@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.21)
+project(NoIdea VERSION 1.0.0 LANGUAGES CXX)
+
+# ========= Set C++ standard
+set(CMAKE_CXX_STANDARD 17) 
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# ========= Set directories
+set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
+set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
+
+# ========= Include directories
+include_directories(${SOURCE_DIR})
+include_directories(${INCLUDE_DIR})
+
+# ========= Add directories files
+file(GLOB_RECURSE SOURCES
+    "${SOURCE_DIR}/*.cpp"
+    "${INCLUDE_DIR}/*.h"
+)
+
+# ========= Include libraries
+    # find_package(Boost COMPONENTS random filesystem system REQUIRED)
+
+# ========= Add executable
+add_executable(${CMAKE_PROJECT_NAME}
+    ${SOURCES}
+)
+
+# ========= Cnfigure macOS package
+if(APPLE)
+    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES MACOSX_BUNDLE TRUE)
+endif()
+
+# ========= Link target subDirectories
+target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC src)
+target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC include)
