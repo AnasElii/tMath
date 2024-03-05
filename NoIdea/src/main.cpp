@@ -6,6 +6,11 @@
 
 using namespace std;
 
+struct GCD_RESULT{
+    int greate_common_divisor;
+    vector<vector<int>> divisor_list;
+};
+
 bool is_prime(int &number)
 {
 	if (number <= 1)
@@ -50,6 +55,27 @@ vector<vector<int>> divisor_list(int &number)
 	}
 }
 
+int divisors_calcul(vector<vector<int>> divisor_list){
+
+	int result = 1;
+
+	for (unsigned int i = 0; i < divisor_list.size(); i++)
+	{
+
+		for (unsigned int j = 0; j < divisor_list[i].size(); j++)
+		{
+			result *= divisor_list[i][j];
+		}
+	}
+
+	return result;
+	
+}
+
+bool lemma_4(int& a, int& b, int& i){
+	
+}
+
 void display(vector<vector<int>> divisor_list, int result)
 {
 
@@ -68,67 +94,94 @@ void display(vector<vector<int>> divisor_list, int result)
 	cout << " = " << result << endl;
 }
 
-int divisors_calcul(vector<vector<int>> divisor_list){
-
-	int result = 1;
-
-	for (unsigned int i = 0; i < divisor_list.size(); i++)
+void compar_lists(vector<vector<int>>& divisor_list_1, vector<vector<int>>& divisor_list_2, vector<vector<int>>& divisor_list_3){
+	
+	
+	// compar the two list of divisors
+	for (unsigned int i = 0; i < divisor_list_1.size(); i++)
 	{
-
-		for (unsigned int j = 0; j < divisor_list[i].size(); j++)
+		for(unsigned int j = 0; j < divisor_list_2.size(); j++)
 		{
-			result *= divisor_list[i][j];
+			if(divisor_list_1[i][0] == divisor_list_2[j][0])
+			{
+				if (divisor_list_1[i].size() < divisor_list_2[j].size())
+				{
+					
+					divisor_list_3.push_back(divisor_list_1[i]);
+				}
+				else
+				{
+					divisor_list_3.push_back(divisor_list_2[j]);
+				}
+			}
 		}
 	}
+}
 
-	return result;
-	
+void greate_common_divisor(int& number_1, int& number_2, GCD_RESULT& gcd_result){
+    
+    if( number_1 < 0 && number_2 < 0 )
+        return;
+    
+    vector<vector<int>> divisor_list_1;
+    vector<vector<int>> divisor_list_2;
+    vector<vector<int>> divisor_list_3;
+    
+    
+
+        // get the list of divisors for each number
+        divisor_list_1 = divisor_list(number_1);
+        divisor_list_2 = divisor_list(number_2);
+
+        // get the GCD
+        // compar the two list of divisors
+        compar_lists(divisor_list_1, divisor_list_2, divisor_list_3);
+            
+        gcd_result.greate_common_divisor = divisors_calcul(divisor_list_3);
+        gcd_result.divisor_list = divisor_list_3;
+        
+    
 }
 
 int main()
 {
-	int number_1 = 49 * 2;
-	int number_2 = 216 * 3;
+	int number_1 = 49;
+	int number_2 = 216;
 	
-	vector<vector<int>> divisor_list_1;
-	vector<vector<int>> divisor_list_2;
-	vector<vector<int>> divisor_list_3;
+    // check if the number is prime
+    if(!is_prime(number_1) && !is_prime(number_2))
+    {
+    
+        GCD_RESULT gcd_result;
+        
+        // get the greate common divisor
+        greate_common_divisor(number_1, number_2, gcd_result);
+        
+        // display the result
+        display(gcd_result.divisor_list, gcd_result.greate_common_divisor);
+        
+        if(gcd_result.greate_common_divisor == 1){
+            for (int i = 1; i <= 100; i++) {
+                GCD_RESULT result;
+                
+                cout << " In the loop " << i << endl;
+                greate_common_divisor(number_1, i, result);
+                
+                cout << "greate common divisor: " << result.greate_common_divisor << " " << endl;
+                
+//                if(result.greate_common_divisor == 1)
+//                {    cout << "Found n= " << result.greate_common_divisor << " divisor of number 1: " << number_1 << endl;
+//                    break;
+//                }else{
+//                    cout << "Not found!" << endl;
+//                }
+            }
+        }
 
-	// check if the number is prime
-	if(!is_prime(number_1) && !is_prime(number_2))
-	{
-
-		// get the list of divisors for each number
-		divisor_list_1 = divisor_list(number_1);
-		divisor_list_2 = divisor_list(number_2);
-
-		// compar the two list of divisors
-		for (unsigned int i = 0; i < divisor_list_1.size(); i++)
-		{
-			for(unsigned int j = 0; j < divisor_list_2.size(); j++)
-			{
-				if(divisor_list_1[i][0] == divisor_list_2[j][0])
-				{
-					if (divisor_list_1[i].size() < divisor_list_2[j].size())
-					{
-						
-						divisor_list_3.push_back(divisor_list_1[i]);
-					}
-					else
-					{
-						divisor_list_3.push_back(divisor_list_2[j]);
-					}
-				}
-			}
-		}
-
-		// display the result
-		display(divisor_list_3, divisors_calcul(divisor_list_3));
-		
-	} else
-	{
-		cout << "The number: " << number_1 << " or " << number_2 << " is a prime";
-	}
-
+    } else
+    {
+        cout << "The number: " << number_1 << " or " << number_2 << " is a prime";
+    }
+        
 	return 0;
 }

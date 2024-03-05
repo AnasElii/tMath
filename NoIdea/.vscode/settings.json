@@ -1,4 +1,12 @@
 {
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.buildDirectory": "${workspaceFolder}/build",
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "vector": "cpp"
+    },
+    "cmake.buildArgs": [
+        "-G",
+        "Xcode"
+    ]
 }
