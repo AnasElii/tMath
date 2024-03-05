@@ -27,7 +27,7 @@ bool is_prime(int &number)
 	return true;
 }
 
-vector<vector<int>> divisor_list(int &number)
+vector<vector<int>> divisor_list(int number)
 {
 	vector<vector<int>> divisorList;
 	vector<int> divisors;
@@ -72,9 +72,9 @@ int divisors_calcul(vector<vector<int>> divisor_list){
 	
 }
 
-bool lemma_4(int& a, int& b, int& i){
-	
-}
+//bool lemma_4(int& a, int& b, int& i){
+//	
+//}
 
 void display(vector<vector<int>> divisor_list, int result)
 {
@@ -118,10 +118,7 @@ void compar_lists(vector<vector<int>>& divisor_list_1, vector<vector<int>>& divi
 	}
 }
 
-void greate_common_divisor(int& number_1, int& number_2, GCD_RESULT& gcd_result){
-    
-    if( number_1 < 0 && number_2 < 0 )
-        return;
+void greate_common_divisor(int number_1, int number_2, GCD_RESULT& gcd_result){
     
     vector<vector<int>> divisor_list_1;
     vector<vector<int>> divisor_list_2;
@@ -159,24 +156,48 @@ int main()
         
         // display the result
         display(gcd_result.divisor_list, gcd_result.greate_common_divisor);
-        
-        if(gcd_result.greate_common_divisor == 1){
-            for (int i = 1; i <= 100; i++) {
-                GCD_RESULT result;
-                
-                cout << " In the loop " << i << endl;
-                greate_common_divisor(number_1, i, result);
-                
-                cout << "greate common divisor: " << result.greate_common_divisor << " " << endl;
-                
-//                if(result.greate_common_divisor == 1)
-//                {    cout << "Found n= " << result.greate_common_divisor << " divisor of number 1: " << number_1 << endl;
-//                    break;
-//                }else{
-//                    cout << "Not found!" << endl;
-//                }
-            }
-        }
+
+		if(gcd_result.greate_common_divisor == 1)
+		{
+			cout << "The numbers: " << number_1 << " and " << number_2 << " are coprime" << endl;
+
+			int i = 2;
+
+			while(true)
+			{
+				GCD_RESULT result;
+				greate_common_divisor(number_1, i, result);
+				if(result.greate_common_divisor == 1)
+				{
+					cout << "The numbers: " << number_1 << " and " << i << " are coprime" << endl;
+
+					GCD_RESULT result2;
+					greate_common_divisor(number_2, i, result2);
+
+					if( result2.greate_common_divisor == 1)
+					{
+						cout << "The numbers: " << number_2 << " and " << i << " are coprime" << endl;
+
+						GCD_RESULT result3;
+						greate_common_divisor(number_1 * number_2, i, result2);
+
+						if (result2.greate_common_divisor == 1)
+						{
+							cout << "The numbers: " << (number_1 * number_2) << " and " << i << " are coprime" << endl;
+
+							break;
+						}
+					}
+
+					
+				}
+				i++;
+			}
+		}
+		else
+		{
+			cout << "The numbers: " << number_1 << " and " << number_2 << " are not coprime" << endl;	
+		}
 
     } else
     {
