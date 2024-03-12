@@ -15,10 +15,32 @@ namespace noIdea
 		vector<vector<int>> divisor_list;
 	};
 
+	struct LEMMA2_RESULT
+	{
+
+	};
+
+	struct LEMMA3_RESULT
+	{
+
+	};
+
 	struct LEMMA4_RESULT
 	{
 		bool isCoprime;
 		int nCoprime;
+	};
+
+	struct LEMMA5_RESULT
+	{
+		
+	};
+
+	enum bits {
+		BITS_4 = 0xF,
+		BITS_8 = 0xFF,
+		BITS_16 = 0xFFFF,
+		BITS_32 = 0xFFFFFFFF
 	};
 
 	class NumberTheory
@@ -177,6 +199,23 @@ namespace noIdea
 			gcd_result.divisor_list = divisorList3;
 		}
 
+		bool lemma1()
+		{
+			 if (std::is_integral_v<decltype(m_number1)> && std::is_integral_v<decltype(m_number2)>)
+			    {
+			        // Check closure properties here
+			        if (std::is_integral_v<decltype(m_number1 + m_number2)> &&
+			            std::is_integral_v<decltype(m_number1 - m_number2)> &&
+			            std::is_integral_v<decltype(m_number1 * m_number2)> && 
+						std::is_integral_v<decltype(m_number1 / m_number2)>)
+			        {
+			            std::cout << "Lemma 1: Integers" << std::endl;
+			            return true;
+			        }
+			    }
+
+			return false;
+		}
 
 		LEMMA4_RESULT lemma4()
 		{
@@ -212,11 +251,24 @@ namespace noIdea
 
 		}
 
+		LEMMA5_RESULT lemma5()
+		{
+			
+		}
+
+		unsigned int convertBitwiseNot(unsigned int number, bits bit) {
+			if (number >= 0 && number <= 32)
+				return ~number & bit;
+
+			return 0;
+		}
+
 	private:
 		int m_number1;
 		int m_number2;
 	};
-}
+};
+
 
 void display(vector<vector<int>>& divisorList, int& result)
 {
@@ -268,6 +320,17 @@ int main()
 		cout << "Hello Mother!" << endl;
 		cout << "The number: " << numberTheory->getNumber1() << " or " << numberTheory->getNumber2() << " is a prime";
 	}
+
+	unsigned int num = 3;
+	cout << "Bitwise NOT of number 3 in BITS_4 (unsigned): " << numberTheory->convertBitwiseNot(num, noIdea::bits::BITS_4) << endl;
+
+	cout << "Bitwise NOT of number 3 in BITS_8 (unsigned): " << numberTheory->convertBitwiseNot(num, noIdea::bits::BITS_8) << endl;
+	cout << "Bitwise NOT of number 3 in BITS_16 (unsigned): " << numberTheory->convertBitwiseNot(num, noIdea::bits::BITS_16) << endl;
+	cout << "Bitwise NOT of number 3 in BITS_32 (unsigned): " << numberTheory->convertBitwiseNot(num, noIdea::bits::BITS_32) << endl;
+
+	numberTheory->lemma1();
+
+	delete numberTheory;
 
 	return 0;
 }
