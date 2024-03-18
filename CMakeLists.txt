@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(NoIdea VERSION 1.0.0 LANGUAGES CXX)
+project(tMath VERSION 1.0.0 LANGUAGES CXX)
 
 # ========= Set C++ standard
 set(CMAKE_CXX_STANDARD 17) 
@@ -15,8 +15,10 @@ include_directories(${INCLUDE_DIR})
 
 # ========= Add directories files
 file(GLOB_RECURSE SOURCES
+    "${SOURCE_DIR}/*.c"
     "${SOURCE_DIR}/*.cpp"
     "${INCLUDE_DIR}/*.h"
+    "${INCLUDE_DIR}/*.hpp"
 )
 
 # ========= Include libraries
@@ -32,10 +34,6 @@ if(APPLE)
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES MACOSX_BUNDLE TRUE)
 endif()
 
-# ========= Link target subDirectories
-target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC src)
-target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC include)
-
 # ========= Generate Xcode project
 if(CMAKE_GENERATOR STREQUAL "Xcode")
     set(XCODE_SCHEME "NoIdea")
@@ -48,3 +46,7 @@ if(CMAKE_GENERATOR STREQUAL "Xcode")
     set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY XCODE_SCHEME_WORKING_DIRECTORY "${CMAKE_XCODE_SCHEME_WORKING_DIRECTORY}")
     set(CMAKE_XCODE_ATTRIBUTE_CONFIGURATION ${XCODE_CONFIGURATION})
 endif()
+
+# ========= Link target subDirectories
+target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC src)
+target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC include)
