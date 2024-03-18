@@ -52,6 +52,14 @@ bool NumberTheory::areBothNumbersPrime() const
 	return isPrime(m_number1) && isPrime(m_number2);
 }
 
+bool NumberTheory::isDivisible(int &number1, int &number2) const
+{
+	if(number1 % number2 == 0)
+		return true;
+
+	return false;
+}
+
 vector<vector<int>> NumberTheory::divisor_list(int number)
 {
 	vector<vector<int>> divisorList;

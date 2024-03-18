@@ -61,6 +61,8 @@ namespace tCryptography
 
 		bool areBothNumbersPrime() const;
 
+		bool isDivisible(int &number1, int &number2) const;
+
 		/**
 		 * @brief Calculate the divisors of a given number and return a list of lists containing the divisors.
 		 * 
@@ -87,7 +89,7 @@ namespace tCryptography
 		void compar_lists(vector<vector<int>>& divisor_list_1, vector<vector<int>>& divisor_list_2,
 		                  vector<vector<int>>& divisor_list_3);
 		/**
-		 * \brief Calculate the greatest common divisor (GCD) of two numbers.
+		 * @brief Calculate the greatest common divisor (GCD) of two numbers.
 		 *
 		 * This function calculates the GCD of two numbers by finding the common divisors of the two numbers
 		 * and then computing the product of those common divisors.
@@ -97,7 +99,7 @@ namespace tCryptography
 		void greatCommonDivisor(GCD_RESULT& gcd_result);
 
 		/**
-		 * \brief Calculates the greatest common divisor of two numbers and provides a list of divisors.
+		 * @brief Calculates the greatest common divisor of two numbers and provides a list of divisors.
 		 *
 		 * @param number_1 The first number for which to find divisors and calculate GCD.
 		 * @param number_2 The second number for which to find divisors and calculate GCD.
@@ -106,7 +108,7 @@ namespace tCryptography
 		void greatCommonDivisor(int& number_1, int& number_2, GCD_RESULT& gcd_result);
 
 		/**
-		 * \brief Check if the numbers satisfy lemma 1.
+		 * @brief Check if the numbers satisfy lemma 1.
 		 *
 		 * This function checks if the numbers are integers and satisfy the closure properties under addition, subtraction, and multiplication.
 		 *
@@ -115,7 +117,7 @@ namespace tCryptography
 		bool lemma1();
 
 		/**
-		 * \brief Implementing Lemma 4 of number theory.
+		 * @brief Implementing Lemma 4 of number theory.
 		 *
 		 * This function finds the smallest positive integer i such that i is coprime to both m_number1 and m_number2.
 		 *
