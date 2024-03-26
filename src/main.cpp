@@ -26,7 +26,7 @@ void display(vector<vector<int>>& divisorList, int& result)
 
 int main()
 {
-	NumberTheory* numberTheory = new NumberTheory(48, 72);
+	NumberTheory* numberTheory = new NumberTheory(48, 216);
 
 	// check if the number is prime
 	if (!numberTheory->areBothNumbersPrime())

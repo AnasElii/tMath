@@ -167,6 +167,25 @@ void NumberTheory::greatCommonDivisor(int& number_1, int& number_2, GCD_RESULT& 
     gcd_result.divisor_list = divisorList3;
 }
 
+int NumberTheory::greatCommonDivisor(int& number_1, int& number_2)
+{
+	// Initialize lists to store divisors
+	vector<vector<int>> divisorList1;
+	vector<vector<int>> divisorList2;
+	vector<vector<int>> divisorList3;
+
+	// Get the list of divisors for each number
+	divisorList1 = divisor_list(number_1);
+	divisorList2 = divisor_list(number_2);
+
+	// Compare the two lists of divisors
+	compar_lists(divisorList1, divisorList2, divisorList3);
+
+	// Calculate the GCD and update the result struct
+	return  divisorsCalcul(divisorList3);
+	
+}
+
 bool NumberTheory::lemma1()
 {
 	if (std::is_integral_v<decltype(m_number1)> && std::is_integral_v<decltype(m_number2)>)
@@ -186,35 +205,20 @@ bool NumberTheory::lemma1()
 
 LEMMA4_RESULT NumberTheory::lemma4()
 {
-	int i = 2;
+	int product = m_number1 * m_number2;
+	int n = 2;
 
-	while (true)
+	while(n <= SOME_UPPER_LIMIT)
 	{
-		GCD_RESULT result;
-		greatCommonDivisor(m_number1, i, result);
-		if (result.greatCommonDivisor == 1)
+		if(greatCommonDivisor(m_number1, n) == 1 && greatCommonDivisor(m_number2, n ) == 1 && greatCommonDivisor(product, n) == 1)
 		{
-			GCD_RESULT result2;
-			greatCommonDivisor(m_number2, i, result2);
-
-			if (result2.greatCommonDivisor == 1)
-			{
-				GCD_RESULT result3;
-				int number = m_number1 * m_number2;
-				greatCommonDivisor(number, i, result2);
-
-				if (result2.greatCommonDivisor == 1)
-				{
-					return LEMMA4_RESULT{ true, i };
-				}
-			}
+			return LEMMA4_RESULT{ true, n };
 		}
 
-		if (i >= 100)
-			return LEMMA4_RESULT{ false, 0 };
-
-		i++;
+		n++;
 	}
+
+	return LEMMA4_RESULT{ false, 0 };
 }
 
 LEMMA5_RESULT NumberTheory::lemma5(LEMMA5_RESULT& result)

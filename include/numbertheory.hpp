@@ -8,6 +8,7 @@
 
 using namespace std;
 
+#define SOME_UPPER_LIMIT 100000
 
 namespace tCryptography
 {
@@ -106,6 +107,7 @@ namespace tCryptography
 		 * @param gcd_result Struct containing the result of GCD calculation and the list of divisors.
 		 */
 		void greatCommonDivisor(int& number_1, int& number_2, GCD_RESULT& gcd_result);
+		int greatCommonDivisor(int& number_1, int& number_2);
 
 		/**
 		 * @brief Check if the numbers satisfy lemma 1.
