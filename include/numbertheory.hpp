@@ -137,6 +137,7 @@ namespace tCryptography
 		 * @return The result of the bitwise NOT operation with the applied bit mask.
 		 */
 		unsigned int convertBitwiseNot(unsigned int number, Bits bit);
+		std::string convertDecimalToBinary(unsigned int number, Bits bit);
 
 	private:
 		int m_number1;
