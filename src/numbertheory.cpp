@@ -36,7 +36,7 @@ bool NumberTheory::isPrime(int number) const
 	if (number <= 1)
 		return false;
 
-	int squareRoot = pow(number, 0.5);
+	int squareRoot = sqrt(number);
 
 	for (int i = 2; i <= (squareRoot + 1); i++)
 		if (number % i == 0)
@@ -129,42 +129,35 @@ void NumberTheory::compar_lists(vector<vector<int>>& divisor_list_1, vector<vect
 	}
 }
 
-void NumberTheory::greatCommonDivisor(GCD_RESULT& gcd_result)
+GCD_RESULT NumberTheory::greatCommonDivisor()
 {
     // Initialize lists to store divisors
-    vector<vector<int>> divisorList1;
-    vector<vector<int>> divisorList2;
-    vector<vector<int>> divisorList3;
-
-    // Get the list of divisors for each number
-    divisorList1 = divisor_list(m_number1);
-    divisorList2 = divisor_list(m_number2);
+    vector<vector<int>> divisor_list1 = divisor_list(m_number1);
+    vector<vector<int>> divisor_list2 = divisor_list(m_number2);
+    vector<vector<int>> divisor_list3;
 
     // Compare the two lists of divisors to find common divisors
-    compar_lists(divisorList1, divisorList2, divisorList3);
+    compar_lists(divisor_list1, divisor_list2, divisor_list3);
 
     // Calculate the GCD by finding the product of common divisors
-    gcd_result.greatCommonDivisor = divisorsCalcul(divisorList3);
-    gcd_result.divisor_list = divisorList3;
+	m_gcd = divisorsCalcul(divisor_list3);
+
+	return { m_gcd, divisor_list3};
 }
 
 void NumberTheory::greatCommonDivisor(int& number_1, int& number_2, GCD_RESULT& gcd_result)
 {
     // Initialize lists to store divisors
-    vector<vector<int>> divisorList1;
-    vector<vector<int>> divisorList2;
-    vector<vector<int>> divisorList3;
-
-    // Get the list of divisors for each number
-    divisorList1 = divisor_list(number_1);
-    divisorList2 = divisor_list(number_2);
+	vector<vector<int>> divisor_list1 = divisor_list(number_1);
+	vector<vector<int>> divisor_list2 = divisor_list(number_2);
+	vector<vector<int>> divisor_list3;
 
     // Compare the two lists of divisors
-    compar_lists(divisorList1, divisorList2, divisorList3);
+    compar_lists(divisor_list1, divisor_list2, divisor_list3);
 
     // Calculate the GCD and update the result struct
-    gcd_result.greatCommonDivisor = divisorsCalcul(divisorList3);
-    gcd_result.divisor_list = divisorList3;
+    gcd_result.greatCommonDivisor = divisorsCalcul(divisor_list3);
+    gcd_result.divisor_list = divisor_list3;
 }
 
 int NumberTheory::greatCommonDivisor(int& number_1, int& number_2)
@@ -221,9 +214,16 @@ LEMMA4_RESULT NumberTheory::lemma4()
 	return LEMMA4_RESULT{ false, 0 };
 }
 
-LEMMA5_RESULT NumberTheory::lemma5(LEMMA5_RESULT& result)
+bool NumberTheory::lemma5()
 {
-	return LEMMA5_RESULT{};
+	int num1 = m_number1 / m_gcd;
+	int num2 = m_number2 / m_gcd;
+	int gcd_result = greatCommonDivisor(num1, num2);
+
+	if(gcd_result == 1)
+		return true;
+
+	return false;
 }
 
 //std::string NumberTheory::convertDecimalToBinary(unsigned int number, Bits bit)

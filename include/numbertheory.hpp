@@ -34,11 +34,6 @@ namespace tCryptography
 		int nCoprime;
 	};
 
-	struct LEMMA5_RESULT
-	{
-		
-	};
-
 	enum Bits {
 		BITS_4 = 0xF,
 		BITS_8 = 0xFF,
@@ -97,7 +92,7 @@ namespace tCryptography
 		 *
 		 * @param gcd_result The struct containing the GCD and the list of divisors.
 		 */
-		void greatCommonDivisor(GCD_RESULT& gcd_result);
+		GCD_RESULT greatCommonDivisor();
 
 		/**
 		 * @brief Calculates the greatest common divisor of two numbers and provides a list of divisors.
@@ -127,7 +122,7 @@ namespace tCryptography
 		 */
 		LEMMA4_RESULT lemma4();
 
-		LEMMA5_RESULT lemma5(LEMMA5_RESULT& result);
+		bool NumberTheory::lemma5();
 
 		/**
 		 * \brief Converts the bitwise NOT of a given number based on the specified bit size.
@@ -144,6 +139,7 @@ namespace tCryptography
 	private:
 		int m_number1;
 		int m_number2;
+		int m_gcd;
 	};
 };
 
