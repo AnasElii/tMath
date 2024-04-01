@@ -21,7 +21,7 @@ void display(const vector<vector<int>>& divisor_list, const int& result)
 				cout << " * ";
 		}
 	}
-	cout << " = " << result << endl;
+	cout << " = " << result << "\n";
 }
 
 int main()
@@ -40,32 +40,36 @@ int main()
 
 		if (gcd_result.greatCommonDivisor == 1)
 		{
-			cout << "the numbers: " << number_theory->getNumber1() << " and " << number_theory->getNumber2() << " are coprime" << endl;
+			cout << "the numbers: " << number_theory->getNumber1() << " and " << number_theory->getNumber2() << " are coprime\n";
 
 			const LEMMA4_RESULT lemma4Result = number_theory->lemma4();
-			cout << "Lemma 4: The value of N number is: " << lemma4Result.nCoprime << endl;
+			const LEMMA3_RESULT lemma3Result = number_theory->lemma3();
+
+			cout << "Lemma 3: Bezout Coefficients are: x = " << lemma3Result.x << " and y = " << lemma3Result.y << "\n";
+			cout << "Lemma 3: Bezout Identifier is: " << number_theory->getNumber1() << " * " << lemma3Result.x << " + " << number_theory->getNumber2() << " * " << lemma3Result.y << " = " << lemma3Result.gcd << "\n";
+			cout << "Lemma 4: The value of N number is: " << lemma4Result.nCoprime << "\n";
 		}
 		else
 		{
-			cout << "the numbers: " << number_theory->getNumber1() << " and " << number_theory->getNumber2() << " are not coprime" << endl;
+			cout << "the numbers: " << number_theory->getNumber1() << " and " << number_theory->getNumber2() << " are not coprime\n";
 		}
 
-		cout << "Lemma 5: The result of GCD is: " << (number_theory->lemma5() ? "true" : "false") << endl;
+		cout << "Lemma 5: The result of GCD is: " << (number_theory->lemma5() ? "true" : "false") << "\n";
 
 	}
 	else
 	{
-		cout << "Hello Mother!" << endl;
-		cout << "The number: " << number_theory->getNumber1() << " or " << number_theory->getNumber2() << " is a prime";
+		cout << "Hello Mother!\n";
+		cout << "The number: " << number_theory->getNumber1() << " or " << number_theory->getNumber2() << " is a prime\n";
 	}
 
 	/*unsigned int num = 0;
-	cout << "Bitwise NOT of number 3 in BITS_4 (unsigned): " << number_theory->convertBitwiseNot(num, Bits::BITS_4) << endl;
-	cout << "Bitwise NOT of number 3 in BITS_8 (unsigned): " << number_theory->convertBitwiseNot(num,  Bits::BITS_8) << endl;
-	cout << "Bitwise NOT of number 3 in BITS_16 (unsigned): " << number_theory->convertBitwiseNot(num, Bits::BITS_16) << endl;
-	cout << "Bitwise NOT of number 3 in BITS_32 (unsigned): " << number_theory->convertBitwiseNot(num, Bits::BITS_32) << endl;
+	cout << "Bitwise NOT of number 3 in BITS_4 (unsigned): " << number_theory->convertBitwiseNot(num, Bits::BITS_4) <<   "\n";
+	cout << "Bitwise NOT of number 3 in BITS_8 (unsigned): " << number_theory->convertBitwiseNot(num,  Bits::BITS_8) <<  "\n";
+	cout << "Bitwise NOT of number 3 in BITS_16 (unsigned): " << number_theory->convertBitwiseNot(num, Bits::BITS_16) << "\n";
+	cout << "Bitwise NOT of number 3 in BITS_32 (unsigned): " << number_theory->convertBitwiseNot(num, Bits::BITS_32) << "\n";
 
-	cout << "Binary: " << number_theory->convertDecimalToBinary(14, Bits::BITS_8) << endl;*/
+	cout << "Binary: " << number_theory->convertDecimalToBinary(14, Bits::BITS_8) << "\n";*/
 
 	//numberTheory->lemma1();
 

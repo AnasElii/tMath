@@ -52,9 +52,18 @@ bool NumberTheory::areBothNumbersPrime() const
 	return isPrime(m_number1) && isPrime(m_number2);
 }
 
-bool NumberTheory::isDivisible(int &number1, int &number2) const
+bool NumberTheory::isDivisible() const
 {
-	if(number1 % number2 == 0)
+	if(m_number1 % m_number2 == 0)
+		return true;
+
+	return false;
+}
+
+
+bool NumberTheory::isDivisible(const int& number1, const int& number2) const
+{
+	if (number1 % number2 == 0)
 		return true;
 
 	return false;
@@ -90,7 +99,23 @@ vector<vector<int>> NumberTheory::divisor_list(int number)
 	}
 }
 
-int NumberTheory::divisorsCalcul(vector<vector<int>> divisor_list)
+void NumberTheory::divisorCalcul(int a, int b)
+{
+	if (a == 0 || b == 0)
+		return;
+
+	if (b % a == 0)
+		return;
+
+	if (a == b)
+		return;
+
+	m_divisor_list.push_back({ {"dividend", b}, {"divisor", a},{"quotient", (int)b / a},  {"rest", b % a} });
+	divisorCalcul(b % a, a);
+}
+
+
+int NumberTheory::gcdCalcul(vector<vector<int>> divisor_list)
 {
 	int result = 1;
 
@@ -140,7 +165,7 @@ GCD_RESULT NumberTheory::greatCommonDivisor()
     compar_lists(divisor_list1, divisor_list2, divisor_list3);
 
     // Calculate the GCD by finding the product of common divisors
-	m_gcd = divisorsCalcul(divisor_list3);
+	m_gcd = gcdCalcul(divisor_list3);
 
 	return { m_gcd, divisor_list3};
 }
@@ -156,7 +181,7 @@ void NumberTheory::greatCommonDivisor(int& number_1, int& number_2, GCD_RESULT& 
     compar_lists(divisor_list1, divisor_list2, divisor_list3);
 
     // Calculate the GCD and update the result struct
-    gcd_result.greatCommonDivisor = divisorsCalcul(divisor_list3);
+    gcd_result.greatCommonDivisor = gcdCalcul(divisor_list3);
     gcd_result.divisor_list = divisor_list3;
 }
 
@@ -175,7 +200,7 @@ int NumberTheory::greatCommonDivisor(int& number_1, int& number_2)
 	compar_lists(divisorList1, divisorList2, divisorList3);
 
 	// Calculate the GCD and update the result struct
-	return  divisorsCalcul(divisorList3);
+	return  gcdCalcul(divisorList3);
 	
 }
 
@@ -194,6 +219,37 @@ bool NumberTheory::lemma1()
 	}
 
 	return false;
+}
+
+
+LEMMA3_RESULT NumberTheory::lemma3()
+{
+	divisorCalcul(m_number1, m_number2);
+
+	int x = 0;
+	int y = 1;
+
+	int index = m_divisor_list.size() - 1;
+	while (true)
+	{
+		int quotient = m_divisor_list[index]["quotient"];
+
+		int temp_x = x;
+		x = y;
+		y = temp_x - quotient * y;
+
+
+		if (index == 0)
+		{
+			temp_x = x;
+			x = y;
+			y = temp_x;
+			break;
+		}
+		index--;
+	}
+
+	return { x, y, m_gcd };
 }
 
 LEMMA4_RESULT NumberTheory::lemma4()
@@ -218,7 +274,7 @@ bool NumberTheory::lemma5()
 {
 	int num1 = m_number1 / m_gcd;
 	int num2 = m_number2 / m_gcd;
-	int gcd_result = greatCommonDivisor(num1, num2);
+	const int gcd_result = greatCommonDivisor(num1, num2);
 
 	if(gcd_result == 1)
 		return true;
@@ -283,6 +339,14 @@ unsigned int NumberTheory::convertBitwiseNot(unsigned int number, Bits bit)
 
 	return 0;
 }
+
+
+
+
+
+
+
+
 
 
 

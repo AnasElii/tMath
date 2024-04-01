@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -18,14 +19,11 @@ namespace tCryptography
 		vector<vector<int>> divisor_list;
 	};
 
-	struct LEMMA2_RESULT
-	{
-
-	};
-
 	struct LEMMA3_RESULT
 	{
-
+		int x;
+		int y;
+		int gcd;
 	};
 
 	struct LEMMA4_RESULT
@@ -57,7 +55,8 @@ namespace tCryptography
 
 		bool areBothNumbersPrime() const;
 
-		bool isDivisible(int &number1, int &number2) const;
+		bool isDivisible() const;
+		bool isDivisible(const int &number1, const int &number2) const;
 
 		/**
 		 * @brief Calculate the divisors of a given number and return a list of lists containing the divisors.
@@ -67,13 +66,15 @@ namespace tCryptography
 		 */
 		vector<vector<int>> divisor_list(int number);
 
+		void divisorCalcul(int a, int b);
+
 		/**
 		 * @brief Calculate the product of all the divisors in the given list of divisors.
 		 * 
 		 * @param divisor_list A list of divisors, where each element is a list of integers representing divisors.
 		 * @return The product of all the divisors in the list.
 		 */
-		int divisorsCalcul(vector<vector<int>> divisor_list);
+		int gcdCalcul(vector<vector<int>> divisor_list);
 
 		/**
 		 * @brief compare the 2 lists and return the final list
@@ -113,6 +114,8 @@ namespace tCryptography
 		 */
 		bool lemma1();
 
+		LEMMA3_RESULT lemma3();
+
 		/**
 		 * @brief Implementing Lemma 4 of number theory.
 		 *
@@ -122,7 +125,7 @@ namespace tCryptography
 		 */
 		LEMMA4_RESULT lemma4();
 
-		bool NumberTheory::lemma5();
+		bool lemma5();
 
 		/**
 		 * \brief Converts the bitwise NOT of a given number based on the specified bit size.
@@ -140,6 +143,7 @@ namespace tCryptography
 		int m_number1;
 		int m_number2;
 		int m_gcd;
+		vector<map<string, int>> m_divisor_list;
 	};
 };
 
