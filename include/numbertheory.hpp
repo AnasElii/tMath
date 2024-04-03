@@ -11,140 +11,146 @@ using namespace std;
 
 #define SOME_UPPER_LIMIT 100000
 
-namespace tCryptography
+namespace tmath
 {
-	struct GCD_RESULT
+	namespace cryptography
 	{
-		int greatCommonDivisor;
-		vector<vector<int>> divisor_list;
-	};
+		struct GCD_RESULT
+		{
+			int great_common_divisor;
+			vector<vector<int>> divisor_list;
+		};
 
-	struct LEMMA3_RESULT
-	{
-		int x;
-		int y;
-		int gcd;
-	};
+		struct LEMMA3_RESULT
+		{
+			int x;
+			int y;
+			int gcd;
+		};
 
-	struct LEMMA4_RESULT
-	{
-		bool isCoprime;
-		int nCoprime;
-	};
+		struct LEMMA4_RESULT
+		{
+			bool is_coprime;
+			int coprime;
+		};
 
-	enum Bits {
-		BITS_4 = 0xF,
-		BITS_8 = 0xFF,
-		BITS_16 = 0xFFFF,
-		BITS_32 = 0xFFFFFFFF
-	};
+		enum Bits {
+			BITS_4 = 0xF,
+			BITS_8 = 0xFF,
+			BITS_16 = 0xFFFF,
+			BITS_32 = 0xFFFFFFFF
+		};
 
-	class NumberTheory
-	{
-	public:
-		NumberTheory(int number1, int number2);
+		class NumberTheory
+		{
+		public:
+			NumberTheory(int number1, int number2);
 
-		~NumberTheory();
+			~NumberTheory();
 
-		void setNumber1(int number_1);
-		int getNumber1() const;
-		void setNumber2(int number_2);
-		int getNumber2() const;
+			void set_number1(int number_1);
+			int get_number1() const;
+			void set_number2(int number_2);
+			int get_number2() const;
 
-		bool isPrime(int number) const;
+			bool is_prime(int number) const;
 
-		bool areBothNumbersPrime() const;
+			bool are_bothNumbers_prime() const;
 
-		bool isDivisible() const;
-		bool isDivisible(const int &number1, const int &number2) const;
+			bool is_divisible() const;
+			bool is_divisible(const int &number1, const int &number2) const;
 
-		/**
-		 * @brief Calculate the divisors of a given number and return a list of lists containing the divisors.
-		 * 
-		 * @param number the number for which to find the divisors
-		 * @return a list of lists containing the divisors
-		 */
-		vector<vector<int>> divisor_list(int number);
+			/**
+			 * @brief Calculate the divisors of a given number and return a list of lists containing the divisors.
+			 * 
+			 * @param number the number for which to find the divisors
+			 * @return a list of lists containing the divisors
+			 */
+			vector<vector<int>> divisor_list(int number);
 
-		void divisorCalcul(int a, int b);
+			void divisor_calcul(int a, int b);
 
-		/**
-		 * @brief Calculate the product of all the divisors in the given list of divisors.
-		 * 
-		 * @param divisor_list A list of divisors, where each element is a list of integers representing divisors.
-		 * @return The product of all the divisors in the list.
-		 */
-		int gcdCalcul(vector<vector<int>> divisor_list);
+			/**
+			 * @brief Calculate the product of all the divisors in the given list of divisors.
+			 * 
+			 * @param divisor_list A list of divisors, where each element is a list of integers representing divisors.
+			 * @return The product of all the divisors in the list.
+			 */
+			int gcd_calcule(vector<vector<int>> divisor_list);
 
-		/**
-		 * @brief compare the 2 lists and return the final list
-		 *
-		 * @param divisor_list_1 list of dividers of the first number
-		 * @param divisor_list_2 list of dividers of the second number 
-		 * @param divisor_list_3 return the final list
-		 */
-		void compar_lists(vector<vector<int>>& divisor_list_1, vector<vector<int>>& divisor_list_2,
-		                  vector<vector<int>>& divisor_list_3);
-		/**
-		 * @brief Calculate the greatest common divisor (GCD) of two numbers.
-		 *
-		 * This function calculates the GCD of two numbers by finding the common divisors of the two numbers
-		 * and then computing the product of those common divisors.
-		 *
-		 * @param gcd_result The struct containing the GCD and the list of divisors.
-		 */
-		GCD_RESULT greatCommonDivisor();
+			/**
+			 * @brief compare the 2 lists and return the final list
+			 *
+			 * @param divisor_list_1 list of dividers of the first number
+			 * @param divisor_list_2 list of dividers of the second number 
+			 * @param divisor_list_3 return the final list
+			 */
+			void compar_lists(const vector<vector<int>>& divisor_list_1, const vector<vector<int>>& divisor_list_2,
+			                  vector<vector<int>>& divisor_list_3) const;
 
-		/**
-		 * @brief Calculates the greatest common divisor of two numbers and provides a list of divisors.
-		 *
-		 * @param number_1 The first number for which to find divisors and calculate GCD.
-		 * @param number_2 The second number for which to find divisors and calculate GCD.
-		 * @param gcd_result Struct containing the result of GCD calculation and the list of divisors.
-		 */
-		void greatCommonDivisor(int& number_1, int& number_2, GCD_RESULT& gcd_result);
-		int greatCommonDivisor(int& number_1, int& number_2);
+			/**
+			 * @brief Calculate the greatest common divisor (GCD) of two numbers.
+			 *
+			 * This function calculates the GCD of two numbers by finding the common divisors of the two numbers
+			 * and then computing the product of those common divisors.
+			 *
+			 * @param gcd_result The struct containing the GCD and the list of divisors.
+			 */
+			GCD_RESULT great_common_Divisor();
 
-		/**
-		 * @brief Check if the numbers satisfy lemma 1.
-		 *
-		 * This function checks if the numbers are integers and satisfy the closure properties under addition, subtraction, and multiplication.
-		 *
-		 * @return true if the numbers satisfy the closure properties, false otherwise
-		 */
-		bool lemma1();
+			/**
+			 * @brief Calculates the greatest common divisor of two numbers and provides a list of divisors.
+			 *
+			 * @param number_1 The first number for which to find divisors and calculate GCD.
+			 * @param number_2 The second number for which to find divisors and calculate GCD.
+			 * @param gcd_result Struct containing the result of GCD calculation and the list of divisors.
+			 */
+			void great_common_divisor(int& number_1, int& number_2, GCD_RESULT& gcd_result);
+			int great_common_divisor(int& number_1, int& number_2);
 
-		LEMMA3_RESULT lemma3();
+			/**
+			 * @brief Check if the numbers satisfy lemma 1.
+			 *
+			 * This function checks if the numbers are integers and satisfy the closure properties under addition, subtraction, and multiplication.
+			 *
+			 * @return true if the numbers satisfy the closure properties, false otherwise
+			 */
+			bool lemma1();
 
-		/**
-		 * @brief Implementing Lemma 4 of number theory.
-		 *
-		 * This function finds the smallest positive integer i such that i is coprime to both m_number1 and m_number2.
-		 *
-		 * @return LEMMA4_RESULT A struct containing a boolean indicating if a solution was found and the value of i.
-		 */
-		LEMMA4_RESULT lemma4();
+			LEMMA3_RESULT lemma3();
 
-		bool lemma5();
+			/**
+			 * @brief Implementing Lemma 4 of number theory.
+			 *
+			 * This function finds the smallest positive integer i such that i is coprime to both m_number1 and m_number2.
+			 *
+			 * @return LEMMA4_RESULT A struct containing a boolean indicating if a solution was found and the value of i.
+			 */
+			LEMMA4_RESULT lemma4();
 
-		/**
-		 * \brief Converts the bitwise NOT of a given number based on the specified bit size.
-		 *
-		 * This function calculates the bitwise NOT of a given number and applies a bit mask based on the specified bit size.
-		 *
-		 * @param number The number to perform bitwise NOT on.
-		 * @param bit The bit size to apply as a mask.
-		 * @return The result of the bitwise NOT operation with the applied bit mask.
-		 */
-		unsigned int convertBitwiseNot(unsigned int number, Bits bit);
-		std::string convertDecimalToBinary(unsigned int number, Bits bit);
+			bool lemma5();
 
-	private:
-		int m_number1;
-		int m_number2;
-		int m_gcd;
-		vector<map<string, int>> m_divisor_list;
-	};
+			std::string convert_decimal_to_Binary(unsigned int number, Bits bit);
+
+			/**
+			 * \brief Converts the bitwise NOT of a given number based on the specified bit size.
+			 *
+			 * This function calculates the bitwise NOT of a given number and applies a bit mask based on the specified bit size.
+			 *
+			 * @param number The number to perform bitwise NOT on.
+			 * @param bit The bit size to apply as a mask.
+			 * @return The result of the bitwise NOT operation with the applied bit mask.
+			 */
+			unsigned int convert_bitwise_not(unsigned int number, Bits bit);
+
+		private:
+			int m_number1;
+			int m_number2;
+			int m_gcd;
+			vector<map<string, int>> m_divisor_list;
+		};
+	}
+
 };
 
 #endif // NUMBERTHEORY_HPP
