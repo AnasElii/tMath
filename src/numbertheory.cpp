@@ -1,4 +1,6 @@
-#include "numbertheory.hpp"
+﻿#include "numbertheory.hpp"
+
+#include <list>
 
 using namespace::tmath::cryptography;
 
@@ -98,7 +100,7 @@ vector<vector<int>> NumberTheory::divisor_list(int number)
 	}
 }
 
-void NumberTheory::divisor_calcul(int a, int b)
+void NumberTheory::divisor_calculate(int a, int b)
 {
 	if (a == 0 || b == 0)
 		return;
@@ -110,7 +112,7 @@ void NumberTheory::divisor_calcul(int a, int b)
 		return;
 
 	m_divisor_list.push_back({ {"dividend", b}, {"divisor", a},{"quotient", (int)b / a},  {"rest", b % a} });
-	divisor_calcul(b % a, a);
+	divisor_calculate(b % a, a);
 }
 
 int NumberTheory::gcd_calcule(vector<vector<int>> finalList)
@@ -216,7 +218,7 @@ bool NumberTheory::lemma1()
 
 LEMMA3_RESULT NumberTheory::lemma3()
 {
-	divisor_calcul(m_number1, m_number2);
+	divisor_calculate(m_number1, m_number2);
 
 	int x = 0;
 	int y = 1;
@@ -260,6 +262,33 @@ LEMMA4_RESULT NumberTheory::lemma4()
 	}
 
 	return LEMMA4_RESULT{ false, 0 };
+}
+
+void NumberTheory::totient(int number)
+{
+	int n = 1;
+	list<int> numberList;
+
+	while (n < number)
+	{
+		if (great_common_divisor(number, n) == 1)
+		{
+			numberList.push_back(n);
+		}
+
+		n++;
+	}
+
+	n = 0;
+
+	// Use an iterator to access elements in the list
+	std::list<int>::iterator it = numberList.begin();
+	while (it != numberList.end())
+	{
+		std::cout << *it << ",";
+		++it;
+	}
+	std::cout << "\n" << "𝜑(" << number << ") = " << numberList.size() << "\n";
 }
 
 bool NumberTheory::lemma5()

@@ -26,7 +26,7 @@ void display(const vector<vector<int>>& divisor_list, const int& result)
 int main()
 {
 	//const auto number_theory = new NumberTheory(48, 72);
-	const auto number_theory = new NumberTheory(49, 216);
+	const auto number_theory = new NumberTheory(48, 216);
 
 	// check if the number is prime
 	if (!number_theory->are_bothNumbers_prime())
@@ -71,6 +71,7 @@ int main()
 	cout << "Binary: " << number_theory->convert_bitwise_not(14, Bits::BITS_8) << "\n";
 
 	//numberTheory->lemma1();
+	number_theory->totient(216);
 
 	delete number_theory;
 

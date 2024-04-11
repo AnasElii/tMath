@@ -68,7 +68,7 @@ namespace tmath
 			 */
 			vector<vector<int>> divisor_list(int number);
 
-			void divisor_calcul(int a, int b);
+			void divisor_calculate(int a, int b);
 
 			/**
 			 * @brief Calculate the product of all the divisors in the given list of divisors.
@@ -127,6 +127,8 @@ namespace tmath
 			 * @return LEMMA4_RESULT A struct containing a boolean indicating if a solution was found and the value of i.
 			 */
 			LEMMA4_RESULT lemma4();
+
+			void totient(int number);
 
 			bool lemma5();
 
