@@ -20,6 +20,7 @@ Debug/
 .vs/
 androidBuild/
 iosBuild/
+ctest/
 
 # C++ objects and libs
 *.slo
