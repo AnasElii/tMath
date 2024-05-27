@@ -52,10 +52,17 @@
         "xmemory": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.tcc": "cpp",
+        "memory_resource": "cpp",
+        "map": "cpp"
     },
+    "cmake.configureArgs": [
+        "${env:OS=='Windows_NT' ? '-G NMake Makefiles' : (env:OS=='Darwin' ? '-G Xcode' : '-G Unix Makefiles')}"
+    ],
     "cmake.buildArgs": [
-        "-G",
-        "Xcode"
-    ]
+        "-j",
+        "18"
+    ],
+    "cmake.configureOnOpen": false
 }

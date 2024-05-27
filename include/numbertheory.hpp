@@ -18,7 +18,9 @@ namespace tmath
 		struct GCD_RESULT
 		{
 			int great_common_divisor;
-			vector<vector<int>> divisor_list;
+			vector<vector<int>> divisor_list = {};
+			bool special_case = false;
+			int special_case_number = 0;
 		};
 
 		struct LEMMA3_RESULT
@@ -32,13 +34,6 @@ namespace tmath
 		{
 			bool is_coprime;
 			int coprime;
-		};
-
-		enum Bits {
-			BITS_4 = 0xF,
-			BITS_8 = 0xFF,
-			BITS_16 = 0xFFFF,
-			BITS_32 = 0xFFFFFFFF
 		};
 
 		class NumberTheory
@@ -132,24 +127,13 @@ namespace tmath
 
 			bool lemma5();
 
-			std::string convert_decimal_to_Binary(unsigned int number, Bits bit);
-
-			/**
-			 * \brief Converts the bitwise NOT of a given number based on the specified bit size.
-			 *
-			 * This function calculates the bitwise NOT of a given number and applies a bit mask based on the specified bit size.
-			 *
-			 * @param number The number to perform bitwise NOT on.
-			 * @param bit The bit size to apply as a mask.
-			 * @return The result of the bitwise NOT operation with the applied bit mask.
-			 */
-			unsigned int convert_bitwise_not(unsigned int number, Bits bit);
+			
 
 		private:
 			int m_number1;
 			int m_number2;
-			int m_gcd;
 			vector<map<string, int>> m_divisor_list;
+			GCD_RESULT* m_gcd_result;
 		};
 	}
 

@@ -3,9 +3,11 @@
 #include <vector>
 
 #include "numbertheory.hpp"
+#include "binary.hpp"
 
 using namespace std;
 using namespace tmath::cryptography;
+using namespace tmath::Binary;
 
 void display(const vector<vector<int>>& divisor_list, const int& result)
 {
@@ -25,12 +27,17 @@ void display(const vector<vector<int>>& divisor_list, const int& result)
 
 int main()
 {
+
+	cout << "============" << " Number Theory " << "============\n";
 	//const auto number_theory = new NumberTheory(48, 72);
-	const auto number_theory = new NumberTheory(48, 216);
+	const auto number_theory = new NumberTheory(48, 1);
 
 	// check if the number is prime
+
 	if (!number_theory->are_bothNumbers_prime())
 	{
+		cout << "Hello Father!\n";
+		cout << "Numbers: " << number_theory->get_number1() << " and " << number_theory->get_number2() << " are not prime\n";
 		// get the great common divisor
 		const GCD_RESULT gcd_result = number_theory->great_common_Divisor();
 
@@ -62,18 +69,22 @@ int main()
 		cout << "The number: " << number_theory->get_number1() << " or " << number_theory->get_number2() << " is a prime\n";
 	}
 
-	unsigned int num = 0;
-	cout << "Bitwise NOT of number 3 in BITS_4 (unsigned): " << number_theory->convert_bitwise_not(num, Bits::BITS_4) <<   "\n";
-	cout << "Bitwise NOT of number 3 in BITS_8 (unsigned): " << number_theory->convert_bitwise_not(num,  Bits::BITS_8) <<  "\n";
-	cout << "Bitwise NOT of number 3 in BITS_16 (unsigned): " << number_theory->convert_bitwise_not(num, Bits::BITS_16) << "\n";
-	cout << "Bitwise NOT of number 3 in BITS_32 (unsigned): " << number_theory->convert_bitwise_not(num, Bits::BITS_32) << "\n";
-
-	cout << "Binary: " << number_theory->convert_bitwise_not(14, Bits::BITS_8) << "\n";
-
 	//numberTheory->lemma1();
 	number_theory->totient(216);
 
+	// Binary Manupulation
+	const auto binary = new Binary();
+	
+	unsigned int num = 0;
+	cout << "Bitwise NOT of number 3 in BITS_4 (unsigned): " <<  binary->convert_bitwise_not(num, Bits::BITS_4) <<   "\n";
+	cout << "Bitwise NOT of number 3 in BITS_8 (unsigned): " <<  binary->convert_bitwise_not(num,  Bits::BITS_8) <<  "\n";
+	cout << "Bitwise NOT of number 3 in BITS_16 (unsigned): " << binary->convert_bitwise_not(num, Bits::BITS_16) << "\n";
+	cout << "Bitwise NOT of number 3 in BITS_32 (unsigned): " << binary->convert_bitwise_not(num, Bits::BITS_32) << "\n";
+
+	cout << "Binary: " << binary->convert_bitwise_not(14, Bits::BITS_8) << "\n";
+
 	delete number_theory;
+	delete binary;
 
 	return 0;
 }
