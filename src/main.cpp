@@ -30,14 +30,12 @@ int main()
 
 	cout << "============" << " Number Theory " << "============\n";
 	//const auto number_theory = new NumberTheory(48, 72);
-	const auto number_theory = new NumberTheory(48, 1);
+	const auto number_theory = new NumberTheory(48, 0);
 
 	// check if the number is prime
 
 	if (!number_theory->are_bothNumbers_prime())
 	{
-		cout << "Hello Father!\n";
-		cout << "Numbers: " << number_theory->get_number1() << " and " << number_theory->get_number2() << " are not prime\n";
 		// get the great common divisor
 		const GCD_RESULT gcd_result = number_theory->great_common_Divisor();
 
@@ -48,19 +46,19 @@ int main()
 		{
 			cout << "the numbers: " << number_theory->get_number1() << " and " << number_theory->get_number2() << " are coprime\n";
 
-			const LEMMA4_RESULT lemma4Result = number_theory->lemma4();
 			const LEMMA3_RESULT lemma3Result = number_theory->lemma3();
+			// const LEMMA4_RESULT lemma4Result = number_theory->lemma4();
 
 			cout << "Lemma 3: Bezout Coefficients are: x = " << lemma3Result.x << " and y = " << lemma3Result.y << "\n";
 			cout << "Lemma 3: Bezout Identifier is: " << number_theory->get_number1() << " * " << lemma3Result.x << " + " << number_theory->get_number2() << " * " << lemma3Result.y << " = " << lemma3Result.gcd << "\n";
-			cout << "Lemma 4: The value of N number is: " << lemma4Result.coprime << "\n";
+			// cout << "Lemma 4: The value of N number is: " << lemma4Result.coprime << "\n";
 		}
 		else
 		{
 			cout << "the numbers: " << number_theory->get_number1() << " and " << number_theory->get_number2() << " are not coprime\n";
 		}
 
-		cout << "Lemma 5: The result of GCD is: " << (number_theory->lemma5() ? "true" : "false") << "\n";
+		// cout << "Lemma 5: The result of GCD is: " << (number_theory->lemma5() ? "true" : "false") << "\n";
 
 	}
 	else

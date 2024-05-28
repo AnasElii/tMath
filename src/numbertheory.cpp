@@ -230,6 +230,11 @@ bool NumberTheory::lemma1()
 
 LEMMA3_RESULT NumberTheory::lemma3()
 {
+	if(m_number1 == m_number2 && m_gcd_result->special_case == true)
+		if(m_gcd_result->special_case_number == 1)
+			return {0, 0, 1};
+		else
+			return {0, 0, m_number1};
 	divisor_calculate(m_number1, m_number2);
 
 	int x = 0;
